@@ -7,6 +7,7 @@
 
 
 
+
 vector<string> split (string sentence, string split) 
 {
     size_t pos_start = 0, pos_end, splitBy_len = split.length();
@@ -26,26 +27,31 @@ vector<string> split (string sentence, string split)
 
 string phonetic::find(string txt, string word)
 {
+    if (word.empty() || txt.empty() || word.size() < 1 || txt.size()  < 1)
+    {
+       cout << "wrong input";
+       throw  std::exception(); //throw exception 
+    }
+    transform(word.begin(), word.end(),word.begin(), :: tolower);  //change word to lower key
     int indexWord, indexCurrent;
     string splitBy = " ";
     string tempCurrent;
-    vector textSplit = split(txt,splitBy);
+    vector textSplit = split(txt,splitBy); //splits the text to words
     bool check = false;
     bool checkChar = false;
     for (auto current : textSplit) 
     {
         tempCurrent = current;
         transform(tempCurrent.begin(), tempCurrent.end(),tempCurrent.begin(), :: tolower);
-        cout << tempCurrent << endl;
-
-        if (tempCurrent.size == word.size)  // check if words length is equal
+        if (tempCurrent.size() == word.size())  // check if words length is equal
         {
            indexWord = 0;
            indexCurrent = 0;
-           for (int i = 0; i < word.size; i++) // go over both words to check if equal
+           for (int i = 0; i < word.size(); i++) // go over both words to check if equal
            {
                if (tempCurrent.at(indexCurrent) == word.at(indexWord))  // checks if letters are equal
                {
+
                   indexWord ++;
                   indexCurrent ++; 
                } 
@@ -54,9 +60,9 @@ string phonetic::find(string txt, string word)
                    char charCurrent = tempCurrent.at(indexCurrent);
                    char charWord = word.at(indexWord);
                    checkChar = checkEqual(charCurrent, charWord); 
-                   if (check == false)
+                   if (checkChar == false)
                    {
-                      i = word.size;  //will stop the for
+                      i = word.size();  //will stop the for
                    }
                    else
                    {
@@ -65,102 +71,98 @@ string phonetic::find(string txt, string word)
                    }
                }
            }
-           if (current.size == indexWord)
+           if (current.size() == indexWord)
            {
                check = true;
-               cout << "The word in the text is : " + current;
+               cout << "The word in the text is : " + current + '\n';
                return current;
+               
            }
            
            
            
-        }
-
-        // here return error
-        
-        // string duplicate = txt;
-        // transform(word.begin(), word.end(),word.begin(), :: tolower); //change txt to lower case
-        // transform(duplicate.begin(), duplicate.end(),duplicate.begin(), :: tolower); //change word to lower case
-      return "";
+        }       
     }
-}
+    cout << "The word " + word + " is not in the text '\n'";
+    throw  std::exception();
+   }
 
-bool checkEqual(char current, char word)
+bool checkEqual(char currentC, char wordC)
 {
-    switch (word){
+    switch (wordC){
       // v || w
         case 'v':
-                if (current == 'w')
+                if (currentC == 'w')
                 {
                     return true;
                 }
                 else return false;
        case 'w':
-                if (current == 'v')
+                if (currentC == 'v')
                 {
                     return true;
                 }
                 else return false; 
     // b || f || p
         case 'b':
-                if (current == 'f' || current == 'p')
+                if (currentC == 'f' || currentC == 'p')
                 {
                     return true;
                 }
                 else return false;  
         case 'f':
-                if (current == 'b' || current == 'p')
+                if (currentC == 'b' || currentC == 'p')
                 {
                     return true;
                 }
                 else return false;                                   
         case 'p':
-                if (current == 'f' || current == 'b')
+                if (currentC == 'f' || currentC == 'b')
                 {
                     return true;
                 }
                 else return false;  
         // j || g
         case 'j':
-                if (current == 'g')
+                if (currentC == 'g')
                 {
                     return true;
                 }
                 else return false;          
         case 'g':
-                if (current == 'j')
+                if (currentC == 'j')
                 {
                     return true;
                 }
                 else return false;  
         // c || k || q
         case 'c':
-                if (current == 'k' || current == 'q')
+                if (currentC == 'k' || currentC == 'q')
                 {
                     return true;
                 }
                 else return false;  
         case 'k':
-                if (current == 'c' || current == 'q')
+                if (currentC == 'c' || currentC == 'q')
                 {
                     return true;
                 }
                 else return false;                                   
         case 'q':
-                if (current == 'c' || current == 'k')
+                if (currentC == 'c' || currentC == 'k')
                 {
                     return true;
                 }
                 else return false; 
         // s || z
         case 's':
-                if (current == 'z')
+                if (currentC == 'z')
                 {
                     return true;
                 }
                 else return false;          
         case 'z':
-                if (current == 's')
+                if (currentC == 's')
                 {
                     return true;
                 }
@@ -168,40 +170,41 @@ bool checkEqual(char current, char word)
        
           // d || t
         case 'd':
-                if (current == 't')
+                if (currentC == 't')
                 {
                     return true;
                 }
                 else return false;          
         case 't':
-                if (current == 'd')
+                if (currentC == 'd')
                 {
                     return true;
                 }
                 else return false;   
          // o || u
         case 'o':
-                if (current == 'u')
+                if (currentC == 'u')
                 {
                     return true;
                 }
                 else return false;          
         case 'u':
-                if (current == 'o')
+                if (currentC == 'o')
                 {
                     return true;
                 }
                 else return false;                 
         // i || y
         case 'i':
-                if (current == 'y')
+                if (currentC == 'y')
                 {
                     return true;
                 }
                 else return false;          
         case 'y':
-                if (current == 'i')
+                if (currentC == 'i')
                 {
+                   ////////////////////////////  cout << "i ";
                     return true;
                 }
                 else return false;  

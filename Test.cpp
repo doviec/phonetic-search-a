@@ -38,11 +38,11 @@ TEST_CASE("Test replacement of lower-case and upper-case") {
 // 8 checks (sum = 8)
 TEST_CASE("Test replacment of v,g,s,d with w,j,z,t respectively"){
     string text = "gladiators vains shrink in combat";
-    CHECK(find(text, "jladiator") == string("gladiator"));
-    CHECK(find(text, "zjladiatorhrink") == string("shrink"));
+    CHECK(find(text, "jladiators") == string("gladiators"));
+    CHECK(find(text, "zhrink") == string("shrink"));
     CHECK(find(text, "wains") == string("vains"));
     CHECK(find(text, "combad") == string("combat"));
-    CHECK(find(text, "glatiador") == string("gladiator"));
+    CHECK(find(text, "glatiadors") == string("gladiators"));
     CHECK(find(text, "vainz") == string("vains"));
     CHECK(find(text, "glatiatorz") == string("gladiators"));
     CHECK(find(text, "jlatiatorz") == string("gladiators"));
@@ -78,7 +78,7 @@ TEST_CASE("Test replacment of b with f & p"){
     CHECK(find(text, "backblib") == string("backflip"));
     CHECK(find(text, "backflif") == string("backflip"));
     CHECK(find(text, "fackblip") == string("backflip"));
-    CHECK(find(text, "fackplipb") == string("backflip"));
+    CHECK(find(text, "fackplib") == string("backflip"));
 
 
 }
@@ -152,7 +152,7 @@ string text = "aDoRiNg mySelf is A must";
   CHECK(find(text, "aDURiNg") == string("aDoRiNg"));
   CHECK(find(text, "atURiNg") == string("aDoRiNg"));
   CHECK(find(text, "aDoRYNg") == string("aDoRiNg"));
-  CHECK(find(text, "aTURUNg") == string("aDoRiNg"));
+  CHECK(find(text, "aTURYNg") == string("aDoRiNg"));
   CHECK(find(text, "atoRYng") == string("aDoRiNg"));
   CHECK(find(text, "ADURYNG") == string("aDoRiNg"));
   CHECK(find(text, "aduring") == string("aDoRiNg"));
